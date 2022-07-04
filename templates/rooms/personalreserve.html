@@ -15,7 +15,6 @@
                       <tr>
                         <th scope="col">Checkin</th>
                         <th scope="col">Nº days</th>
-                        <!--<th scope="col">Action</th>-->
                       </tr>
                     </thead>
                     <tbody>
@@ -24,12 +23,11 @@
                         <td><a>{{ reservation.checkin }}</a></td>
                         <td><a>{{ reservation.number_host }}</a></td>
                     </tr>
-                    {% empty %}
-                        <li>No reservation yeat.</li>
-                    {% endfor %}
                     </tbody>
+                    {% empty %}
+                    <h2>No reserve yeat.</h2>
+                    {% endfor %}
                 </table>
-
         </div>
     </div>
 </div>
