@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Resorts{% endblock %}
+
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <div class="container p-5">
+            <h2 class="card-title">My Reserve:</h2>
+            <hr>
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">Checkin</th>
+                        <th scope="col">Nº days</th>
+                        <!--<th scope="col">Action</th>-->
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for reservation in reservations %}
+                    <tr>
+                        <td><a>{{ reservation.checkin }}</a></td>
+                        <td><a>{{ reservation.number_host }}</a></td>
+                    </tr>
+                    {% empty %}
+                        <li>No reservation yeat.</li>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

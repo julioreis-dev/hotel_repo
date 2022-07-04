@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Resort{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <div class="container p-5">
+            <h2 class="card-title">Avaibility in {{ rooms.hotels }}:</h2>
+            <hr>
+                {% if rooms.active %}
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">Room number</th>
+                        <th scope="col">Price</th>
+                        <!--<th scope="col">Action</th>-->
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><a href="{% url 'rooms:reservation_rooms' pk=rooms.pk %}">{{ rooms.number }}</a></td>
+                        <td><a href="{% url 'rooms:reservation_rooms' pk=rooms.pk %}">{{ rooms.price }}</a></td>
+                        <!--<td><button type="button" class="btn btn-primary">Rooms</button></td>-->
+                    </tr>
+                    </tbody>
+                </table>
+                {% else %}
+                <h2>Unfortunately, This moment we don't have rooms available.</h2>
+                {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

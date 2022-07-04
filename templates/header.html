@@ -1,0 +1,54 @@
+{% load static %}
+
+<nav class="navbar main-nav navbar-expand-lg px-2 px-sm-0 py-2 py-lg-0">
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'rooms:home_rooms' %}"><img src="{% static 'images/logo.png' %}" alt="logo"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="ti-menu"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+          <li class="nav-item @@about">
+              <a class="nav-link" href="{% url 'rooms:home_rooms' %}">Home</a>
+            </li>
+            <li class="nav-item @@about">
+              <a class="nav-link" href="https://documenter.getpostman.com/view/14303483/UV5XhxV6">API Doc</a>
+            </li>
+            <li class="nav-item @@about">
+                <a class="nav-link" href="https://github.com/julioreis-dev/price_coins"><i class="fa fa-github" style="font-size:24px"></i></a>
+            </li>
+            <li class="nav-item @@about">
+                <a class="nav-link" href="https://www.linkedin.com/in/julio-dos-reis-firmino-6b11246a/"><i class="fa fa-linkedin" style="font-size:24px"></i></a>
+            </li>
+          {% if user.is_authenticated %}
+
+          <li class="nav-item @@about">
+              <a class="nav-link" href="{% url 'rooms:list_hotels' %}">Hotels</a>
+          </li>
+
+          <li class="nav-item @@about">
+              <a class="nav-link" href="{% url 'rooms:my_reservations' pk=user.pk %}">My reserve</a>
+          </li>
+
+           <li class="nav-item dropdown active">
+          <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Hi dear, {{ user.username|capfirst }}
+            <span><i class="ti-angle-down"></i></span>
+          </a>
+          <!-- Dropdown list -->
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item active" href="{% url 'password_reset' %}">Change Password</a></li>
+            <li><a class="dropdown-item active" href="{% url 'account_logout' %}">Log Out</a></li>
+          </ul>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'account_login' %}">Log In</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a>
+            </li>
+          {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
