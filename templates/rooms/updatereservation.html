@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Reservation{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+<h2>Update Reservation</h2>
+    <hr>
+    <form class="login100-form validate-form" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+    <br>
+</div>
+{% endblock %}
