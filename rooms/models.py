@@ -19,6 +19,10 @@ class Hotels(Base):
     def __str__(self):
         return f'{self.name}'
 
+    class Meta:
+        verbose_name = 'Hotel'
+        verbose_name_plural = 'Hotels'
+
 
 class Rooms(Base):
     number = models.IntegerField(verbose_name='Nº room')
@@ -29,6 +33,10 @@ class Rooms(Base):
     def __str__(self):
         return f'{self.number}'
 
+    class Meta:
+        verbose_name = 'Room'
+        verbose_name_plural = 'Rooms'
+
 
 class Reservation(Base):
     client_user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
@@ -38,3 +46,7 @@ class Reservation(Base):
 
     def __str__(self):
         return f'{self.client_user} - {self.checkin}'
+
+    class Meta:
+        verbose_name = 'Reservation'
+        verbose_name_plural = 'Reservations'
