@@ -14,15 +14,16 @@
                       <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Address</th>
-                        <!--<th scope="col">Action</th>-->
+                        <th scope="col">Action</th>
                       </tr>
                     </thead>
                     <tbody>
                     {% for hotel in hotels %}
                         {% if hotel.active %}
                     <tr>
-                        <td><a href="{% url 'rooms:list_rooms' pk=hotel.pk %}">{{ hotel.name }}</a></td>
-                        <td><a href="{% url 'rooms:list_rooms' pk=hotel.pk %}">{{ hotel.address }}</a></td>
+                        <td>{{ hotel.name }}</td>
+                        <td>{{ hotel.address }}</td>
+                        <td><a href="{% url 'rooms:list_rooms' pk=hotel.pk %}" class="btn btn-success">Avaibility</a></td>
                     </tr>
                         {% endif %}
                     {% empty %}
@@ -30,7 +31,6 @@
                     {% endfor %}
                     </tbody>
                 </table>
-
         </div>
     </div>
 </div>
