@@ -14,14 +14,14 @@
                     <thead class="thead-dark">
                       <tr>
                         <th scope="col">Checkin</th>
-                        <th scope="col">Nº days</th>
+                        <th scope="col">Action</th>
                       </tr>
                     </thead>
                     <tbody>
                     {% for reservation in reservations %}
                     <tr>
                         <td><a>{{ reservation.checkin }}</a></td>
-                        <td><a>{{ reservation.number_host }}</a></td>
+                        <td><a href="{% url 'rooms:update_reservation' pk=reservation.pk %}" class="btn btn-outline-secondary">Update</a></td>
                     </tr>
                     </tbody>
                     {% empty %}
