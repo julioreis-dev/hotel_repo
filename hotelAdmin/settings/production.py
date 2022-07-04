@@ -6,7 +6,7 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 
 # Alterar para o IP do ambiente de produção quando houver.
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['hotelproject-app.herokuapp.com']
 
 
 DATABASES = {
