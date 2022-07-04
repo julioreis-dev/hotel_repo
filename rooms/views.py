@@ -82,3 +82,26 @@ class RoomsUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy("rooms:list_hotels")
     form_class = ReservationForm
 
+    def post(self, request, *args, **kwargs):
+        form = ReservationForm(data=request.POST)
+
+        if form.is_valid():
+            checkin = form.cleaned_data.get('checkin')
+            number_host = form.cleaned_data.get('number_host')
+            if datetime.date(checkin) == datetime.date(datetime.today()):
+                messages.error(request, 'This room is not availabe to be reserved today.')
+            elif (datetime.date(checkin + timedelta(number_host))) - (datetime.date(datetime.today())) >= timedelta(30):
+                messages.error(request, "This room can't be reserved more than 30 days in advance.")
+            else:
+                resp = list(map(search_data, [checkin + timedelta(i) for i in range(0, number_host)]))
+                if all(resp):
+                    insert_list = [
+                        Reservation(client_user=request.user, checkin=checkin + timedelta(day), number_host=number_host)
+                        for day in range(0, number_host)]
+                    Reservation.objects.bulk_create(insert_list)
+                    messages.success(request, 'Room reserved Successfully')
+                    # return HttpResponseRedirect(reverse_lazy('rooms:home_rooms'))
+                else:
+                    messages.error(request, 'This room is not availabe on your selected dates')
+        return render(request, "rooms/reservation.html", {'form': form})
+
