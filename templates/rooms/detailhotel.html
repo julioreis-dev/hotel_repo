@@ -23,7 +23,7 @@
                     <tr>
                         <td>{{ room.number }}</td>
                         <td>{{ room.price }}</td>
-                        <td><a href="{% url 'rooms:reservation_rooms' pk=room.pk %}" class="btn btn-success">Avaibility</a></td>
+                        <td><a href="{% url 'rooms:reservation_rooms' pk=room.pk %}" class="btn btn-success">availability</a></td>
                     </tr>
                     {% else %}
                         <h2>Unfortunately, This moment we don't have rooms available.</h2>

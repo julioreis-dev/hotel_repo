@@ -23,7 +23,7 @@
                     <tr>
                         <td>{{ hotel.name }}</td>
                         <td>{{ hotel.address }}</td>
-                        <td><a href="{% url 'rooms:list_rooms' pk=hotel.pk %}" class="btn btn-success">Avaibility</a></td>
+                        <td><a href="{% url 'rooms:list_rooms' pk=hotel.pk %}" class="btn btn-success">availability</a></td>
                     </tr>
                         {% endif %}
                     {% empty %}
