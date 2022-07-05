@@ -21,7 +21,7 @@
                     {% for reservation in reservations %}
                     <tr>
                         <td><a>{{ reservation.checkin }}</a></td>
-                        <td><a href="{% url 'rooms:update_reservation' pk=reservation.pk %}" class="btn btn-outline-secondary">Update</a></td>
+                        <td><a href="{% url 'rooms:update_reservation' pk=reservation.pk %}" class="btn btn-outline-secondary">Update</a> <a href="{% url 'rooms:delete_reservation' pk=reservation.pk %}" class="btn btn-outline-secondary">Delete</a></td>
                     </tr>
                     </tbody>
                     {% empty %}

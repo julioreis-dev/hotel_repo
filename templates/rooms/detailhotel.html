@@ -7,9 +7,8 @@
 <div class="card">
     <div class="card-body">
         <div class="container p-5">
-            <h2 class="card-title">Avaibility in {{ rooms.hotels }}:</h2>
+            <h2 class="card-title">Rooms Available:</h2>
             <hr>
-                {% if rooms.active %}
                 <table class="table table-hover">
                     <thead class="thead-dark">
                       <tr>
@@ -19,17 +18,25 @@
                       </tr>
                     </thead>
                     <tbody>
+                    {% for room in rooms %}
+                        {% if room.active %}
                     <tr>
-                        <td>{{ rooms.number }}</td>
-                        <td>{{ rooms.price }}</td>
-                        <td><a href="{% url 'rooms:reservation_rooms' pk=rooms.pk %}" class="btn btn-success">Avaibility</a></td>
+                        <td>{{ room.number }}</td>
+                        <td>{{ room.price }}</td>
+                        <td><a href="{% url 'rooms:reservation_rooms' pk=room.pk %}" class="btn btn-success">Avaibility</a></td>
                     </tr>
+                    {% else %}
+                        <h2>Unfortunately, This moment we don't have rooms available.</h2>
+                    {% endif %}
+                    {% empty %}
+                        <h2>Unfortunately, This moment we don't have rooms available.</h2>
+                    {% endfor %}
                     </tbody>
                 </table>
-                {% else %}
-                <h2>Unfortunately, This moment we don't have rooms available.</h2>
-                {% endif %}
         </div>
     </div>
 </div>
 {% endblock %}
+
+
+<!--<td><a href="#{% url 'rooms:reservation_rooms' pk=rooms.pk %}" class="btn btn-success">Avaibility</a></td>-->

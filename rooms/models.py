@@ -42,10 +42,10 @@ class Reservation(Base):
     client_user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     checkin = models.DateTimeField()
     number_host = models.IntegerField(verbose_name='Nº of days', null=True, blank=True, choices=DAY_CHOICE, default=1)
-    # rooms = models.OneToOneField(Rooms, null=True, blank=True, on_delete=models.CASCADE)
+    rooms = models.ForeignKey(Rooms, null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.client_user} - {self.checkin}'
+        return f'{self.client_user}'
 
     class Meta:
         verbose_name = 'Reservation'
