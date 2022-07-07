@@ -5,10 +5,10 @@ from .views import HotelsViewSet, ReservationViewSet, RoomsViewSet
 app_name = 'api'
 
 router = DefaultRouter()
-router.register('hotels', HotelsViewSet, basename='hotels')
+router.register('hotels', viewset=HotelsViewSet, basename='hotelsview')
 
 urlpatterns = [
     path('', include(router.urls)),
     path('rooms/', RoomsViewSet.as_view(), name='rooms'),
     path('reservations/', ReservationViewSet.as_view(), name='reservations'),
-]
+] + router.urls
