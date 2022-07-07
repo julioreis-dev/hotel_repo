@@ -25,7 +25,7 @@
 8. To log out, simply click the button on the upper right corner which shows their username, then click log out.
 
 
-For additional features on this site:
+## For additional features on this site:
 
 + The system is prepared to be scalable, more hotels and rooms can be created
 
