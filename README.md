@@ -1,4 +1,4 @@
-<h1>Cancun Hotel</h1>
+<h1>Hotel Resort</h1>
 
 ![app](https://user-images.githubusercontent.com/67196397/177887943-958ea30d-261e-4bd8-868b-cd7d341eb251.png)
 
