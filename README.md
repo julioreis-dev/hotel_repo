@@ -74,5 +74,7 @@ Link: https://hotelprojectapp.herokuapp.com/
 </table>
 
 ## Coverage Report:
+### Unit tests was created, follow the coverage report:
+
 ![cobertura](https://user-images.githubusercontent.com/67196397/177887562-e4fd40ed-fba4-4ee6-a8bd-f85ba0f3197a.png)
 
