@@ -1,8 +1,12 @@
-This application is designed to check the availability of hotel rooms in Cancun. Guests can also reserve a room of their preferred date, change booking details, and explore the website for some policies.
+<h1>Cancun Hotel</h1>
 
-The application to address all the requirements given to in the test.
+### This application is designed to check the availability of hotel rooms in Cancun. Guests can also reserve a room of their preferred date, change booking details, and explore the website for some policies.
 
-In order to access the whole website, the user has to do the following steps:
+### The application to address all the requirements given to in the test.
+
+### In order to access the whole website, the user has to do the following steps:
+
+## Tutorial:
 
 1. Sign-up
 Fill in the form by typing a username, password, and email (optional).
@@ -24,18 +28,38 @@ Fill in the form by typing a username, password, and email (optional).
 
 For additional features on this site:
 
-1. Security layer - such as (SECURE_HSTS_SECONDS, SECURE_HSTS_INCLUDE_SUBDOMAINS, SECURE_CONTENT_TYPE_NOSNIFF, SECURE_BROWSER_XSS_FILTER, SESSION_COOKIE_SECURE, CSRF_COOKIE_SECURE, CSRF_COOKIE_HTTPONLY, X_FRAME_OPTIONS)
++ Security layer - such as (SECURE_HSTS_SECONDS, SECURE_HSTS_INCLUDE_SUBDOMAINS, SECURE_CONTENT_TYPE_NOSNIFF, SECURE_BROWSER_XSS_FILTER, SESSION_COOKIE_SECURE, CSRF_COOKIE_SECURE, CSRF_COOKIE_HTTPONLY, X_FRAME_OPTIONS)
 
-2. Authentication
++ Authentication
 
-3. Log in and out
++ Log in and out
 
-4. Changing of password
++ Changing of password
 
-5. Confirmation mail after signing up
++ Confirmation mail after signing up
 
-6. Admin system support- if troubleshooting is needed, the system will send or receive a notification that something has to be fixed.
++ Admin system support- if troubleshooting is needed, the system will send or receive a notification that something has to be fixed.
 
-7. Environment variables to protect secret information
++ Environment variables to protect secret information
 
-8. Application deployed in Heroku
++ Custom User
+
++ Application deployed in Heroku
+
+## Technogies used:
+<table>
+    <tr>
+        <td>Python</td>
+        <td>Django</td>
+        <td>Django Rest Framework</td>
+        <td>Postgres</td>
+        <td>Pytest</td>
+    </tr>
+    <tr>
+        <td>3.8.7</td>
+        <td>3.2</td>
+        <td>3.12.4</td>
+        <td>0.5.0</td>
+        <td>7.1.2</td>
+    </tr>
+</table>
