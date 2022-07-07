@@ -18,7 +18,7 @@
 
 4. Once logged-in, they will see their personal dashboard where they can access the whole website as a guest.
 
-5. On the above panel, they can see the following buttons as seen on the screenshot below.
+5. On the above panel, they can see the following buttons as seen on the screenshot.
 
 6. By clicking the button "hotel", available rooms will appear and the user can choose their preferred dates of stay. Note that it's not possible to book 30 days or more in advance of the current day.
 
