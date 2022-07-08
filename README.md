@@ -1,4 +1,8 @@
-<h1>Cancun Hotel</h1>
+<h1>Hotel Resort</h1>
+
+Link: https://hotelprojectapp.herokuapp.com/
+
+![app](https://user-images.githubusercontent.com/67196397/177887943-958ea30d-261e-4bd8-868b-cd7d341eb251.png)
 
 ### This application is designed to check the availability of hotel rooms in Cancun. Guests can also reserve a room of their preferred date, change booking details, and explore the website for some policies.
 
@@ -16,7 +20,7 @@
 
 4. Once logged-in, they will see their personal dashboard where they can access the whole website as a guest.
 
-5. On the above panel, they can see the following buttons as seen on the screenshot below.
+5. On the above panel, they can see the following buttons as seen on the screenshot.
 
 6. By clicking the button "hotel", available rooms will appear and the user can choose their preferred dates of stay. Note that it's not possible to book 30 days or more in advance of the current day.
 
@@ -26,6 +30,10 @@
 
 
 ## For additional features on this site:
+
++ Always the client complete the process of book a room, the client will receive a email with reservation confirmation
+
++ Always the client update a reservation, the client will receive an email with a new data
 
 + The system is prepared to be scalable, more hotels and rooms can be created
 
@@ -70,4 +78,7 @@
 </table>
 
 ## Coverage Report:
+### Unit tests was created, follow the coverage report:
+
+![cobertura](https://user-images.githubusercontent.com/67196397/177887562-e4fd40ed-fba4-4ee6-a8bd-f85ba0f3197a.png)
 
