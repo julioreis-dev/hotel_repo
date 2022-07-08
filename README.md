@@ -31,6 +31,10 @@ Link: https://hotelprojectapp.herokuapp.com/
 
 ## For additional features on this site:
 
++ Always the client complete the process of book a room, the client will receive a email with reservation confirmation
+
++ Always the client update a reservation, the client will receive an email with a new data
+
 + The system is prepared to be scalable, more hotels and rooms can be created
 
 + Security layer - such as (SECURE_HSTS_SECONDS, SECURE_HSTS_INCLUDE_SUBDOMAINS, SECURE_CONTENT_TYPE_NOSNIFF, SECURE_BROWSER_XSS_FILTER, SESSION_COOKIE_SECURE, CSRF_COOKIE_SECURE, CSRF_COOKIE_HTTPONLY, X_FRAME_OPTIONS)
