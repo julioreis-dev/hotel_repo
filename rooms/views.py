@@ -1,13 +1,12 @@
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect
+from django.core.mail import send_mail, mail_admins
 from django.urls import reverse_lazy
 from .models import Hotels, Rooms, Reservation
 from .forms import ReservationForm
 from datetime import timedelta, datetime
 from django.contrib import messages
 from django.shortcuts import render
-from users.models import User
 
 
 class HomepageView(TemplateView):
@@ -45,9 +44,30 @@ class HotelDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
+def emailbody(**kwargs):
+    """
+    Function responsible to prepare body email
+    :param kwargs: dict
+    :return: tuple
+    """
+    if kwargs.get('status') == 1:
+        title = f'Thank you for your reservation in our hotel'
+        body = f'Dear client\nYour reservation is to: {kwargs.get("check")}\nThank you!!!'
+        emailfrom = 'contato@firminostech.com'
+        destination = [kwargs.get("destination")]
+        response = title, body, emailfrom, destination
+    else:
+        title = f'Thank you for your update in our hotel'
+        body = f'Dear client\nYour book update is to: {kwargs.get("check")}\nThank you!!!'
+        emailfrom = 'contato@firminostech.com'
+        destination = [kwargs.get("destination")]
+        response = title, body, emailfrom, destination
+    return response
+
+
 def search_data(day, number, room):
     """
-    Method to looking for check out registered
+    Function to looking for check out registered
     :param day: datetime
     :param number: int
     :param room: int
@@ -87,15 +107,25 @@ class ReservationCreateView(LoginRequiredMixin, CreateView):
             elif (datetime.date(checkin + timedelta(number_host))) - (datetime.date(datetime.today())) >= timedelta(30):
                 messages.error(request, "This room can't be reserved more than 30 days in advance.")
             else:
-                # resp = list(map(search_data, [checkin + timedelta(i) for i in range(0, number_host)]))
                 resp = search_data(checkin, number_host, kwargs['pk'])
                 if all(resp[0]):
-                    insert_list = [
-                        Reservation(client_user=request.user, checkin=checkin + timedelta(day), number_host=number_host,
-                                    rooms=resp[1][0]) for day in range(0, number_host)]
-                    Reservation.objects.bulk_create(insert_list)
-                    messages.success(request, 'Room reserved Successfully')
-                    # return HttpResponseRedirect(reverse_lazy('rooms:home_rooms'))
+                    try:
+                        insert_list = [
+                            Reservation(client_user=request.user,
+                                        checkin=checkin + timedelta(day),
+                                        number_host=number_host,
+                                        rooms=resp[1][0]) for day in range(0, number_host)]
+                        Reservation.objects.bulk_create(insert_list)
+                        messages.success(request, 'Room reserved Successfully')
+                        title, msg, fromemail, listrecipient = emailbody(status=1, check=checkin, quantity=number_host,
+                                                                         destination=request.user.email)
+                        send_mail(title, msg, fromemail, listrecipient, fail_silently=False)
+                    except Exception as e:
+                        mail_admins(
+                            'email not sent',
+                            f'Erro: {e}',
+                            fail_silently=False,
+                        )
                 else:
                     messages.error(request, 'This room is not availabe on your selected dates')
         return render(request, "rooms/reservation.html", {'form': form})
@@ -144,13 +174,23 @@ class RoomsUpdateView(LoginRequiredMixin, UpdateView):
             else:
                 resp = search_data(checkin, number_host, kwargs['pk'])
                 if all(resp[0]):
-                    insert_list = [
-                        Reservation(client_user=request.user, checkin=checkin + timedelta(day), number_host=number_host,
-                                    rooms=instance_room.rooms) for day in range(0, number_host)]
-                    Reservation.objects.bulk_create(insert_list)
-                    record = Reservation.objects.get(id=kwargs['pk'])
-                    record.delete()
-                    messages.success(request, 'Room reserved Successfully')
+                    try:
+                        insert_list = [
+                            Reservation(client_user=request.user, checkin=checkin + timedelta(day),
+                                        number_host=number_host,
+                                        rooms=instance_room.rooms) for day in range(0, number_host)]
+                        Reservation.objects.bulk_create(insert_list)
+                        record = Reservation.objects.get(id=kwargs['pk'])
+                        record.delete()
+                        messages.success(request, 'Room reserved Successfully')
+                        title, msg, fromemail, listrecipient = emailbody(status=2, check=checkin, quantity=number_host,
+                                                                         destination=request.user.email)
+                        send_mail(title, msg, fromemail, listrecipient, fail_silently=False)
+                    except Exception as e:
+                        mail_admins(
+                            'email not sent',
+                            f'Erro: {e}',
+                            fail_silently=False, )
                 else:
                     messages.error(request, 'This room is not availabe on your selected dates')
         return render(request, "rooms/reservation.html", {'form': form})
