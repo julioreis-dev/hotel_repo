@@ -2,6 +2,7 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView,
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail, mail_admins
 from django.urls import reverse_lazy
+from .controles import search_edit_reservation, search_data, emailbody
 from .models import Hotels, Rooms, Reservation
 from .forms import ReservationForm
 from datetime import timedelta, datetime
@@ -27,13 +28,13 @@ class HotelsListView(LoginRequiredMixin, ListView):
 
 class HotelDetailView(LoginRequiredMixin, DetailView):
     """
-    Class Based View to list rooms each hotel
+    Class Based View to list rooms to each hotel
     """
     model = Hotels
     template_name = 'rooms/detailhotel.html'
     context_object_name = 'rooms'
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs) -> object:
         """
         Method to create a new object 'rooms' inside the context
         :param kwargs: dict
@@ -42,42 +43,6 @@ class HotelDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context['rooms'] = Rooms.objects.filter(hotels=kwargs['object'])
         return context
-
-
-def emailbody(**kwargs):
-    """
-    Function responsible to prepare body email
-    :param kwargs: dict
-    :return: tuple
-    """
-    if kwargs.get('status') == 1:
-        title = f'Thank you for your reservation in our hotel'
-        body = f'Dear client\nYour reservation is to: {kwargs.get("check")}\nThank you!!!'
-        emailfrom = 'contato@firminostech.com'
-        destination = [kwargs.get("destination")]
-        response = title, body, emailfrom, destination
-    else:
-        title = f'Thank you for your update in our hotel'
-        body = f'Dear client\nYour book update is to: {kwargs.get("check")}\nThank you!!!'
-        emailfrom = 'contato@firminostech.com'
-        destination = [kwargs.get("destination")]
-        response = title, body, emailfrom, destination
-    return response
-
-
-def search_data(day, number, room):
-    """
-    Function to looking for check out registered
-    :param day: datetime
-    :param number: int
-    :param room: int
-    :return: tuple
-    """
-    answer_list = []
-    for i in range(0, number):
-        out = Reservation.objects.filter(checkin=day + timedelta(i), rooms=room)
-        answer_list.append(False if len(out) != 0 else True)
-    return answer_list, Rooms.objects.filter(id=room)
 
 
 class ReservationCreateView(LoginRequiredMixin, CreateView):
@@ -89,10 +54,10 @@ class ReservationCreateView(LoginRequiredMixin, CreateView):
     form_class = ReservationForm
     success_url = reverse_lazy("rooms:reservation_rooms")
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs) -> object:
         """
         Method to valid a reservation with base in some requirements
-        :param request: default
+        :param request: object (default)
         :param args: tuple
         :param kwargs: dict
         :return: template
@@ -107,7 +72,7 @@ class ReservationCreateView(LoginRequiredMixin, CreateView):
             elif (datetime.date(checkin + timedelta(number_host))) - (datetime.date(datetime.today())) >= timedelta(30):
                 messages.error(request, "This room can't be reserved more than 30 days in advance.")
             else:
-                resp = search_data(checkin, number_host, kwargs['pk'])
+                resp = search_data(day=checkin, number=number_host, room=kwargs['pk'])
                 if all(resp[0]):
                     try:
                         insert_list = [
@@ -138,10 +103,10 @@ class MyreservationListView(LoginRequiredMixin, ListView):
     model = Reservation
     template_name = 'rooms/personalreserve.html'
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, *, object_list=None, **kwargs) -> object:
         """
         Method to create a new object 'reservations' inside the context
-        :param object_list: default
+        :param object_list: object (default)
         :param kwargs: dict
         :return: object
         """
@@ -160,7 +125,7 @@ class RoomsUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy("rooms:list_hotels")
     form_class = ReservationForm
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs) -> object:
         form = ReservationForm(data=request.POST)
         instance_room = Reservation.objects.filter(id=kwargs['pk'])[0]
 
@@ -172,8 +137,8 @@ class RoomsUpdateView(LoginRequiredMixin, UpdateView):
             elif (datetime.date(checkin + timedelta(number_host))) - (datetime.date(datetime.today())) >= timedelta(30):
                 messages.error(request, "This room can't be reserved more than 30 days in advance.")
             else:
-                resp = search_data(checkin, number_host, kwargs['pk'])
-                if all(resp[0]):
+                resp = search_edit_reservation(day=checkin, number=number_host, room=kwargs['pk'])
+                if all(resp):
                     try:
                         insert_list = [
                             Reservation(client_user=request.user, checkin=checkin + timedelta(day),
