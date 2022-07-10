@@ -124,11 +124,14 @@ AUTH_USER_MODEL = 'users.User'
 
 ACCOUNT_SIGNUP_REDIRECT_URL = "rooms:home_rooms"
 ACCOUNT_SESSION_REMEMBER = True
-LOGIN_REDIRECT_URL = 'rooms:home_rooms'
-ACCOUNT_LOGOUT_REDIRECT = 'rooms:home_rooms'
 
+# django-allauth config
+LOGIN_REDIRECT_URL = 'rooms:home_rooms'
+LOGOUT_REDIRECT_URL = 'rooms:home_rooms'
+# ACCOUNT_LOGOUT_REDIRECT = 'rooms:home_rooms'
 SITE_ID = 1
 
+# Authentication config
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
@@ -136,6 +139,7 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+# Django message config
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',
     messages.INFO: 'alert-info',
@@ -144,7 +148,7 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 
-# email params
+# Email params
 DEFAULT_FROM_EMAIL = env('EMAIL_HOST_USER')
 EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
 EMAIL_HOST = 'smtp.zoho.com'
