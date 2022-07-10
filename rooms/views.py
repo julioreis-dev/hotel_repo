@@ -67,8 +67,8 @@ class ReservationCreateView(LoginRequiredMixin, CreateView):
         if form.is_valid():
             checkin = form.cleaned_data.get('checkin')
             number_host = form.cleaned_data.get('number_host')
-            if datetime.date(checkin) == datetime.date(datetime.today()):
-                messages.error(request, 'This room is not availabe to be reserved today.')
+            if datetime.date(checkin) <= datetime.date(datetime.today()):
+                messages.error(request, "This room can't be reserved in this date.")
             elif (datetime.date(checkin + timedelta(number_host))) - (datetime.date(datetime.today())) >= timedelta(30):
                 messages.error(request, "This room can't be reserved more than 30 days in advance.")
             else:
@@ -132,8 +132,8 @@ class RoomsUpdateView(LoginRequiredMixin, UpdateView):
         if form.is_valid():
             checkin = form.cleaned_data.get('checkin')
             number_host = form.cleaned_data.get('number_host')
-            if datetime.date(checkin) == datetime.date(datetime.today()):
-                messages.error(request, 'This room is not availabe to be reserved today.')
+            if datetime.date(checkin) <= datetime.date(datetime.today()):
+                messages.error(request, "This room can't be reserved in this date.")
             elif (datetime.date(checkin + timedelta(number_host))) - (datetime.date(datetime.today())) >= timedelta(30):
                 messages.error(request, "This room can't be reserved more than 30 days in advance.")
             else:
