@@ -44,6 +44,6 @@ def search_edit_reservation(**kwargs) -> list:
     """
     answer_list = []
     for i in range(0, kwargs.get('number')):
-        out = Reservation.objects.filter(checkin=kwargs.get('day') + timedelta(i), pk=kwargs.get('room'))
+        out = Reservation.objects.filter(checkin=kwargs.get('day') + timedelta(i), rooms=kwargs.get('room'))
         answer_list.append(False if len(out) != 0 else True)
     return answer_list

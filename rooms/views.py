@@ -137,7 +137,7 @@ class RoomsUpdateView(LoginRequiredMixin, UpdateView):
             elif (datetime.date(checkin + timedelta(number_host))) - (datetime.date(datetime.today())) >= timedelta(30):
                 messages.error(request, "This room can't be reserved more than 30 days in advance.")
             else:
-                resp = search_edit_reservation(day=checkin, number=number_host, room=kwargs['pk'])
+                resp = search_edit_reservation(day=checkin, number=number_host, room=instance_room.rooms)
                 if all(resp):
                     try:
                         insert_list = [
