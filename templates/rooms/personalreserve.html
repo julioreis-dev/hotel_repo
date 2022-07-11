@@ -13,6 +13,8 @@
                 <table class="table table-hover">
                     <thead class="thead-dark">
                       <tr align="center">
+                        <th scope="col">Hotel</th>
+                        <th scope="col">Room</th>
                         <th scope="col">Checkin</th>
                         <th scope="col">Action</th>
                       </tr>
@@ -20,6 +22,8 @@
                     <tbody>
                     {% for reservation in reservations %}
                     <tr align="center">
+                        <td><a>{{ reservation.rooms.hotels }}</a></td>
+                        <td><a>{{ reservation.rooms}}</a></td>
                         <td><a>{{ reservation.checkin }}</a></td>
                         <td><a href="{% url 'rooms:update_reservation' pk=reservation.pk %}" class="btn btn-outline-secondary">Update</a> <a href="{% url 'rooms:delete_reservation' pk=reservation.pk %}" class="btn btn-outline-danger">Delete</a></td>
                     </tr>
