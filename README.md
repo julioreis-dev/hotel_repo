@@ -63,14 +63,14 @@ Link: https://hotelprojectapp.herokuapp.com/
 
 ## Technologies used:
 <table>
-    <tr>
+    <tr align="center">
         <td>Python</td>
         <td>Django</td>
         <td>Django Rest Framework</td>
         <td>Postgres</td>
         <td>Pytest</td>
     </tr>
-    <tr>
+    <tr align="center">
         <td>3.8.7</td>
         <td>3.2</td>
         <td>3.12.4</td>
