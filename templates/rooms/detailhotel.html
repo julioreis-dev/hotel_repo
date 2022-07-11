@@ -11,7 +11,7 @@
             <hr>
                 <table class="table table-hover">
                     <thead class="thead-dark">
-                      <tr>
+                      <tr align="center">
                         <th scope="col">Room number</th>
                         <th scope="col">Price</th>
                         <th scope="col">Action</th>
@@ -20,7 +20,7 @@
                     <tbody>
                     {% for room in rooms %}
                         {% if room.active %}
-                    <tr>
+                    <tr align="center">
                         <td>{{ room.number }}</td>
                         <td>{{ room.price }}</td>
                         <td><a href="{% url 'rooms:reservation_rooms' pk=room.pk %}" class="btn btn-success">availability</a></td>
