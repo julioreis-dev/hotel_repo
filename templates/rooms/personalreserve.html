@@ -12,16 +12,16 @@
             <hr>
                 <table class="table table-hover">
                     <thead class="thead-dark">
-                      <tr>
+                      <tr align="center">
                         <th scope="col">Checkin</th>
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
                     <tbody>
                     {% for reservation in reservations %}
-                    <tr>
+                    <tr align="center">
                         <td><a>{{ reservation.checkin }}</a></td>
-                        <td><a href="{% url 'rooms:update_reservation' pk=reservation.pk %}" class="btn btn-outline-secondary">Update</a> <a href="{% url 'rooms:delete_reservation' pk=reservation.pk %}" class="btn btn-outline-secondary">Delete</a></td>
+                        <td><a href="{% url 'rooms:update_reservation' pk=reservation.pk %}" class="btn btn-outline-secondary">Update</a> <a href="{% url 'rooms:delete_reservation' pk=reservation.pk %}" class="btn btn-outline-danger">Delete</a></td>
                     </tr>
                     </tbody>
                     {% empty %}
