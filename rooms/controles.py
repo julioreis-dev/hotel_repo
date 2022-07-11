@@ -8,17 +8,23 @@ def emailbody(**kwargs) -> tuple:
     :param kwargs: dict
     :return: tuple
     """
+    dates_in = kwargs.get("check")
+    dates_out = kwargs.get("check") + timedelta(kwargs.get("quantity"))
     if kwargs.get('status') == 1:
         title = f'Thank you for your reservation in our hotel'
-        body = f'Dear client\nYour reservation is to: {kwargs.get("check")}\nThank you!!!'
+        body = f'Dear {kwargs.get("destination")},\nFollow a report about your reservation:\n'\
+               f'Check in: {dates_in.year}/{dates_in.month}/{dates_in.day}\n' \
+               f'Check out: {dates_out.year}/{dates_out.month}/{dates_out.day}\nThank you so much!!!'
         emailfrom = 'contato@firminostech.com'
-        destination = [kwargs.get("destination")]
+        destination = [kwargs.get("destination").email]
         response = title, body, emailfrom, destination
     else:
         title = f'Thank you for your update in our hotel'
-        body = f'Dear client\nYour book update is to: {kwargs.get("check")}\nThank you!!!'
+        body = f'Dear {kwargs.get("destination")},\nFollow a report about your update reservation:\n'\
+               f'Check in: {dates_in.year}/{dates_in.month}/{dates_in.day}\n' \
+               f'Check out: {dates_out.year}/{dates_out.month}/{dates_out.day}\nThank you so much!!!'
         emailfrom = 'contato@firminostech.com'
-        destination = [kwargs.get("destination")]
+        destination = [kwargs.get("destination").email]
         response = title, body, emailfrom, destination
     return response
 

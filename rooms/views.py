@@ -83,7 +83,7 @@ class ReservationCreateView(LoginRequiredMixin, CreateView):
                         Reservation.objects.bulk_create(insert_list)
                         messages.success(request, 'Room reserved Successfully')
                         title, msg, fromemail, listrecipient = emailbody(status=1, check=checkin, quantity=number_host,
-                                                                         destination=request.user.email)
+                                                                         destination=request.user)
                         send_mail(title, msg, fromemail, listrecipient, fail_silently=False)
                     except Exception as e:
                         mail_admins(
@@ -149,7 +149,7 @@ class RoomsUpdateView(LoginRequiredMixin, UpdateView):
                         record.delete()
                         messages.success(request, 'Room reserved Successfully')
                         title, msg, fromemail, listrecipient = emailbody(status=2, check=checkin, quantity=number_host,
-                                                                         destination=request.user.email)
+                                                                         destination=request.user)
                         send_mail(title, msg, fromemail, listrecipient, fail_silently=False)
                     except Exception as e:
                         mail_admins(
