@@ -112,7 +112,11 @@ class MyreservationListView(LoginRequiredMixin, ListView):
         :return: object
         """
         context = super().get_context_data(**kwargs)
-        context['reservations'] = Reservation.objects.filter(client_user=self.request.user)
+        list_price = Reservation.objects.select_related('rooms').all()
+        value = sum([i.rooms.price for i in list_price])
+        # context['reservations'] = Reservation.objects.filter(client_user=self.request.user)
+        context['reservations'] = list_price
+        context['total'] = 0.00 if value == 0 else value
         return context
 
 
@@ -149,8 +153,11 @@ class RoomsUpdateView(LoginRequiredMixin, UpdateView):
                         record = Reservation.objects.get(id=kwargs['pk'])
                         record.delete()
                         messages.success(request, 'Room reserved Successfully')
-                        title, msg, fromemail, listrecipient = emailbody(status=2, check=checkin, quantity=number_host,
-                                                                         destination=request.user, property=instance_room)
+                        title, msg, fromemail, listrecipient = emailbody(status=2,
+                                                                         check=checkin,
+                                                                         quantity=number_host,
+                                                                         destination=request.user,
+                                                                         property=instance_room)
                         send_mail(title, msg, fromemail, listrecipient, fail_silently=False)
                     except Exception as e:
                         mail_admins(
