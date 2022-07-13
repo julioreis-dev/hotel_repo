@@ -112,9 +112,8 @@ class MyreservationListView(LoginRequiredMixin, ListView):
         :return: object
         """
         context = super().get_context_data(**kwargs)
-        list_price = Reservation.objects.select_related('rooms').all()
+        list_price = Reservation.objects.filter(client_user=self.request.user)
         value = sum([i.rooms.price for i in list_price])
-        # context['reservations'] = Reservation.objects.filter(client_user=self.request.user)
         context['reservations'] = list_price
         context['total'] = 0.00 if value == 0 else value
         return context
