@@ -11,6 +11,7 @@
         <p>Are you sure you want to delete this reservation?</p>
         {% csrf_token %}
         {{ form|crispy }}
+        <br>
         <button type="submit" class="btn btn-success">Submit</button>
     </form>
     <br>

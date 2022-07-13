@@ -8,6 +8,7 @@
 <div class="card">
     <div class="card-body">
         <div class="container p-5">
+            {% if reservations %}
             <h2 class="card-title">My Reservations:</h2>
             <hr>
                 <table class="table table-hover">
@@ -28,12 +29,15 @@
                         <td><a href="{% url 'rooms:update_reservation' pk=reservation.pk %}" class="btn btn-outline-secondary">Update</a> <a href="{% url 'rooms:delete_reservation' pk=reservation.pk %}" class="btn btn-outline-danger">Delete</a></td>
                     </tr>
                     </tbody>
-                    {% empty %}
-                    <h2>No reservation yet.</h2>
                     {% endfor %}
                 </table>
-                <hr>
-                <h2 class="card-title">Total: ${{ total }}</h2>
+            <hr>
+            <h2 class="card-title">Total: ${{ total }}</h2>
+            {% else %}
+            <hr>
+            <h2>Dear {{ user.username|capfirst }}, your list of reservation is empty.</h2>
+            <h2 class="card-title">Total: ${{ total }}</h2>
+            {% endif %}
         </div>
     </div>
 </div>
