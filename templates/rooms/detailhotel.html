@@ -7,7 +7,7 @@
 <div class="card">
     <div class="card-body">
         <div class="container p-5">
-            <h2 class="card-title">Rooms Available:</h2>
+            <h2 class="card-title">Rooms available in {{ name_hotel }}</h2>
             <hr>
                 <table class="table table-hover">
                     <thead class="thead-dark">
@@ -25,14 +25,13 @@
                         <td>${{ room.price }}</td>
                         <td><a href="{% url 'rooms:reservation_rooms' pk=room.pk %}" class="btn btn-success">availability</a></td>
                     </tr>
-                    {% else %}
-                        <h2>Unfortunately, This moment we don't have rooms available.</h2>
                     {% endif %}
                     {% empty %}
-                        <h2>Unfortunately, This moment we don't have rooms available.</h2>
+                        <h2>This hotels doesn't have rooms.</h2>
                     {% endfor %}
                     </tbody>
                 </table>
+            <hr>
         </div>
     </div>
 </div>

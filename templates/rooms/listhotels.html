@@ -7,7 +7,7 @@
 <div class="card">
     <div class="card-body">
         <div class="container p-5">
-            <h2 class="card-title">List hotels:</h2>
+            <h2 class="card-title">Hotels available:</h2>
             <hr>
                 <table class="table table-hover">
                     <thead class="thead-dark">
@@ -20,14 +20,14 @@
                     <tbody>
                     {% for hotel in hotels %}
                         {% if hotel.active %}
-                    <tr align="center">
-                        <td>{{ hotel.name }}</td>
-                        <td>{{ hotel.address }}</td>
-                        <td><a href="{% url 'rooms:list_rooms' pk=hotel.pk %}" class="btn btn-success">availability</a></td>
-                    </tr>
+                        <tr align="center">
+                            <td>{{ hotel.name }}</td>
+                            <td>{{ hotel.address }}</td>
+                            <td><a href="{% url 'rooms:list_rooms' pk=hotel.pk %}" class="btn btn-success">availability</a></td>
+                        </tr>
                         {% endif %}
-                    {% empty %}
-                    <li>Não há notas cadastradas</li>
+                        {% empty %}
+                        <h2>We don't have hotels registered yet.</h2>
                     {% endfor %}
                     </tbody>
                 </table>
