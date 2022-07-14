@@ -43,6 +43,7 @@ class HotelDetailView(LoginRequiredMixin, DetailView):
         """
         context = super().get_context_data(**kwargs)
         context['rooms'] = Rooms.objects.filter(hotels=kwargs['object'])
+        context['name_hotel'] = kwargs['object']
         return context
 
 
