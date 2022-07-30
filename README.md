@@ -79,8 +79,8 @@ Link: https://hotelprojectapp.herokuapp.com/
     </tr>
 </table>
 
-## Model Database:
-### Follow the model of database this project.
+## Entity Relational Diagram:
+### Follow the ERD developed in this project.
 
 ![Untitled(1)](https://user-images.githubusercontent.com/67196397/181649305-61594cd9-3328-46de-9a7b-8b3296e35e35.png)
 
