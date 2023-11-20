@@ -11,7 +11,7 @@ class Metadata:
 
     def process_view(self, request, view_func, view_args, view_kwargs):
         if request.user.is_authenticated:
-            message = f'Welcome, {salutation()}'
+            message = f'Bem vindo, {salutation()}'
         else:
             message = "Firmino's Technology"
 

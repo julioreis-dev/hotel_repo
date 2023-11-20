@@ -9,15 +9,15 @@
     <div class="card-body">
         <div class="container p-5">
             {% if reservations %}
-            <h2 class="card-title">My Reservations:</h2>
+            <h2 class="card-title">Minhas Reservas:</h2>
             <hr>
                 <table class="table table-hover">
                     <thead class="thead-dark">
                       <tr align="center">
                         <th scope="col">Hotel</th>
-                        <th scope="col">Room</th>
+                        <th scope="col">Quarto</th>
                         <th scope="col">Checkin</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Ação</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -26,13 +26,15 @@
                         <td><a>{{ reservation.rooms.hotels }}</a></td>
                         <td><a>{{ reservation.rooms}}</a></td>
                         <td><a>{{ reservation.checkin|date:"D, M d, Y" }}</a></td>
-                        <td><a href="{% url 'rooms:update_reservation' pk=reservation.pk %}" class="btn btn-outline-secondary">Update</a> <a href="{% url 'rooms:delete_reservation' pk=reservation.pk %}" class="btn btn-outline-danger">Delete</a></td>
+                        <td><a href="{% url 'rooms:update_reservation' pk=reservation.pk %}" class="btn btn-outline-secondary">Editar</a>
+                            <a href="{% url 'rooms:delete_reservation' pk=reservation.pk %}" class="btn btn-outline-danger">Deletar</a>
+                        </td>
                     </tr>
                     </tbody>
                     {% endfor %}
                 </table>
             <hr>
-            <h2 class="card-title">Total: ${{ total }}</h2>
+            <h2 class="card-title">Total: R${{ total }}</h2>
             {% else %}
             <hr>
             <h2>Dear {{ user.username|capfirst }}, your list of reservation is empty.</h2>

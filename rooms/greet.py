@@ -3,8 +3,8 @@ import datetime
 def salutation():
     cur = datetime.datetime.now().time()
     if cur.hour < 12:
-        return 'Good morning'
+        return 'Bom dia'
     elif cur.hour > 18:
-        return 'Good night'
+        return 'Boa noite'
     else:
-        return 'Good afternoon'
+        return 'Boa tarde'

@@ -13,7 +13,7 @@ def emailbody(**kwargs) -> tuple:
     if kwargs.get('status') == 1:
         title = f'Thank you for your reservation in our hotel'
         body = f'Dear {kwargs.get("destination")},\nFollow a report about your reservation:\n' \
-               f'hotel: {kwargs.get("property").hotels} - room: {kwargs.get("property")}\n'\
+               f'hotel: {kwargs.get("property").hotels} - room: {kwargs.get("property")}\n' \
                f'Check in: {dates_in.year}/{dates_in.month}/{dates_in.day}\n' \
                f'Check out: {dates_out.year}/{dates_out.month}/{dates_out.day}\nThank you so much!!!'
         emailfrom = 'contato@firminostech.com'
@@ -22,7 +22,7 @@ def emailbody(**kwargs) -> tuple:
     else:
         title = f'Thank you for your update in our hotel'
         body = f'Dear {kwargs.get("destination")},\nFollow a report about your update reservation:\n' \
-               f'hotel: {kwargs.get("property").rooms.hotels} - room: {kwargs.get("property").rooms}\n'\
+               f'hotel: {kwargs.get("property").rooms.hotels} - room: {kwargs.get("property").rooms}\n' \
                f'Check in: {dates_in.year}/{dates_in.month}/{dates_in.day}\n' \
                f'Check out: {dates_out.year}/{dates_out.month}/{dates_out.day}\nThank you so much!!!'
         emailfrom = 'contato@firminostech.com'

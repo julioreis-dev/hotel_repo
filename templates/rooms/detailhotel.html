@@ -7,14 +7,14 @@
 <div class="card">
     <div class="card-body">
         <div class="container p-5">
-            <h2 class="card-title">Rooms available in {{ name_hotel }}</h2>
+            <h2 class="card-title">Quartos disponíveis no {{ name_hotel }}</h2>
             <hr>
                 <table class="table table-hover">
                     <thead class="thead-dark">
                       <tr align="center">
-                        <th scope="col">Room number</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Número do quarto</th>
+                        <th scope="col">Preço</th>
+                        <th scope="col">Ação</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -22,12 +22,12 @@
                         {% if room.active %}
                     <tr align="center">
                         <td>{{ room.number }}</td>
-                        <td>${{ room.price }}</td>
-                        <td><a href="{% url 'rooms:reservation_rooms' pk=room.pk %}" class="btn btn-success">availability</a></td>
+                        <td>R${{ room.price }}</td>
+                        <td><a href="{% url 'rooms:reservation_rooms' pk=room.pk %}" class="btn btn-success">Disponível</a></td>
                     </tr>
                     {% endif %}
                     {% empty %}
-                        <h2>This hotels doesn't have rooms.</h2>
+                        <h2>Esse hotel ainda não possui quartos cadastrados.</h2>
                     {% endfor %}
                     </tbody>
                 </table>
