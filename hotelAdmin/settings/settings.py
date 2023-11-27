@@ -151,7 +151,7 @@ MESSAGE_TAGS = {
 # Email params
 DEFAULT_FROM_EMAIL = env('EMAIL_HOST_USER')
 EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
-EMAIL_HOST = 'smtp.zoho.com'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_SSL = env('EMAIL_USE_SSL')
 EMAIL_PORT = env('EMAIL_PORT')
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
