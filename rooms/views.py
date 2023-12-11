@@ -138,9 +138,9 @@ class RoomsUpdateView(LoginRequiredMixin, UpdateView):
             checkin = form.cleaned_data.get('checkin')
             number_host = form.cleaned_data.get('number_host')
             if datetime.date(checkin) <= datetime.date(datetime.today()):
-                messages.error(request, "This room can't be reserved in this date.")
+                messages.error(request, "O quarto não pode ser reservado nessa data.")
             elif (datetime.date(checkin + timedelta(number_host))) - (datetime.date(datetime.today())) >= timedelta(30):
-                messages.error(request, "This room can't be reserved more than 30 days in advance.")
+                messages.error(request, "O quarto não pode ser reservado com data acima de 30 dias.")
             else:
                 resp = search_edit_reservation(day=checkin, number=number_host, room=instance_room.rooms)
                 if all(resp):
@@ -152,7 +152,7 @@ class RoomsUpdateView(LoginRequiredMixin, UpdateView):
                         Reservation.objects.bulk_create(insert_list)
                         record = Reservation.objects.get(id=kwargs['pk'])
                         record.delete()
-                        messages.success(request, 'Room reserved Successfully')
+                        messages.success(request, 'O quarto foi reservado com sucesso.')
                         title, msg, fromemail, listrecipient = emailbody(status=2,
                                                                          check=checkin,
                                                                          quantity=number_host,
@@ -165,7 +165,7 @@ class RoomsUpdateView(LoginRequiredMixin, UpdateView):
                             f'Erro: {e}',
                             fail_silently=False, )
                 else:
-                    messages.error(request, 'This room is not availabe on your selected dates')
+                    messages.error(request, 'Esse quarto não esta disponível na data selecionada.')
         return render(request, "rooms/reservation.html", {'form': form})
 
 
